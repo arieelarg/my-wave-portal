@@ -11,19 +11,22 @@ const main = async () => {
 
   console.log("Contract address:", waveContract.address); // address where the contract is stored in the blockchain
 
-  console.log("Owner:", owner.address); // my address acount as owner and creator
+  //  console.log("Owner:", owner.address); // my address acount as owner and creator
 
-  await waveContract.getTotalWaves();
+  let waveCount = await waveContract.getTotalWaves();
 
-  let waveTxn = await waveContract.wave(); // waving myself
-  await waveTxn.wait(); // awaits a promise
-
-  await waveContract.getTotalWaves();
-
-  waveTxn = await waveContract.connect(randomPerson).wave(); // random person waving at me
+  let waveTxn = await waveContract.wave("HI YO!"); // waving myself
   await waveTxn.wait();
 
-  await waveContract.getTotalWaves();
+  waveTxn = await waveContract.connect(randomPerson).wave("Hello!");
+  await waveTxn.wait();
+
+  waveTxn = await waveContract.connect(randomPerson).wave("Hello to you!"); // random person waving at me
+  await waveTxn.wait();
+
+  const allWaves = await waveContract.getAllWaves();
+
+  console.log(allWaves);
 };
 
 const runMain = async () => {
