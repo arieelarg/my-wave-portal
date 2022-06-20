@@ -7,17 +7,31 @@ import "hardhat/console.sol"; // for debuggin purposes
 contract WavePortal {
     uint256 totalWaves; // static to the contract
 
-    constructor() {
-        console.log("Hello world!"); // only for dev
+    event NewWave(address indexed from, uint256 timestamp, string message);
+
+    struct Wave {
+        address waver; // The address of the user who waved.
+        string message; // The message the user sent.
+        uint256 timestamp; // The timestamp when the user waved.
     }
 
-    function wave() public { // type: public, this allows for public use
+    Wave[] waves; // waves[] = variable to storage history of waves
+
+    constructor() {
+        console.log("Smart Contracting FTW!"); // only for dev
+    }
+
+    function wave(string memory _message) public { // type: public, this allows for public use
         totalWaves += 1;
-        console.log("%s has waved!", msg.sender); // only for dev
+
+        waves.push(Wave(msg.sender, _message, block.timestamp));
     }
 
     function getTotalWaves() public view returns (uint256) {
-        console.log("We have %d total waves!", totalWaves); // only for dev
-        return totalWaves;
+        return totalWaves; // returns total of waves
+    }
+
+    function getAllWaves() public view returns (Wave[] memory) {
+        return waves; // returns all waves
     }
 }
