@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: UNLICENSED
-
+// SPDX-License-Identifier: MIT
+// licenses: https://spdx.org/licenses/
 pragma solidity ^0.8.0; // Solidity compiler version we want our contract to use
 
 import "hardhat/console.sol"; // for debuggin purposes
@@ -17,14 +17,25 @@ contract WavePortal {
 
     Wave[] waves; // waves[] = variable to storage history of waves
 
-    constructor() {
+    constructor() payable {
         console.log("Smart Contracting FTW!"); // only for dev
     }
 
-    function wave(string memory _message) public { // type: public, this allows for public use
+    function wave(string memory _message) public {
         totalWaves += 1;
+        console.log("%s has waved!", msg.sender);
 
         waves.push(Wave(msg.sender, _message, block.timestamp));
+
+        emit NewWave(msg.sender, block.timestamp, _message); // Así se llama al evento NewWave
+
+        uint256 prizeAmount = 0.0001 ether;
+        require(
+            prizeAmount <= address(this).balance,
+            "Trying to withdraw more money than the contract has."
+        );
+        (bool success, ) = (msg.sender).call{value: prizeAmount}(""); // sends the prize!
+        require(success, "Failed to withdraw money from contract.");
     }
 
     function getTotalWaves() public view returns (uint256) {

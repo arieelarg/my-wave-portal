@@ -1,8 +1,32 @@
-# Basic Sample Hardhat Project
+# Wave portal
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+A ERC-20 contract deployed through Alchemy into Rinkeby test network.
 
-Try running some of the following tasks:
+# Project scripts
+
+```shell
+npm run run-contract // runs the whole thing locally (transactions)
+npm run deploy:localhost // deploys to localhost
+npm run deploy:realnet // deploys to realnet (in this project Rinkeby)
+```
+
+# How to develop?
+
+Every time we make a change in the contract we could validate the output by running: 
+
+```shell
+npm run contract
+```
+
+# How to deploy to realnet?
+
+Just run:
+
+```shell
+npm run deploy:realnet
+```
+
+# Another Useful Hardhat scripts
 
 ```shell
 npx hardhat accounts
@@ -13,9 +37,8 @@ npx hardhat node // starts local blockchain
 npx hardhat help
 ```
 
-# Scripts
+# Hardhat?
 
-```shell
-npx run script/run.js // just runs the whole thing without having a server local
-npx hardhat run scripts/deploy.js --network localhost // deploys to localhost
-```
+The Hardhat Runtime Environment, or HRE for short, is an object containing all the functionality that Hardhat exposes when running a task, test or script. Hardhat is the HRE.
+
+More information [here](https://hardhat.org/advanced/hardhat-runtime-environment?utm_source=buildspace.so&utm_medium=buildspace_project)

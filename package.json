@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run-contract": "npx hardhat run scripts/run.js",
-    "realnet:test": "npx hardhat run scripts/deploy.js --network rinkeby"
+    "contract": "npx hardhat run scripts/run.js",
+    "deploy:local": "npx hardhat run scripts/deploy.js --network localhost",
+    "deploy:realnet": "npx hardhat run scripts/deploy.js --network rinkeby"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +15,6 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "chai": "^4.3.6",
     "dotenv": "^16.0.1",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.8",
